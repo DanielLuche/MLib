@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="mLib_color_red_1">#D9534F</color>
+    <color name="mLib_color_red_1_alpha">#55D9534F</color>
+
+    <color name="mLib_color_green_1">#5CB85C</color>
+    <color name="mLib_color_green_1_alpha">#555CB85C</color>
+
+    <color name="mLib_color_gray_1">#ADADAD</color>
+    <color name="mLib_color_gray_1_alpha">#55ADADAD</color>
+
+</resources>

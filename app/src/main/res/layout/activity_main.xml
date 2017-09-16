@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dluche.mlib.MainActivity"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/main_et_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
+
+    <ctrls.CtrlTextViewTest
+        android:id="@+id/main_ctrl_001"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <Switch
+        android:id="@+id/main_sw_dup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aceita Duplicado"
+        />
+    <Switch
+        android:id="@+id/main_sw_case"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Case Sensitive"
+        />
+
+    <ctrls.CtrlContainerList
+        android:id="@+id/main_ctrl_002"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>
