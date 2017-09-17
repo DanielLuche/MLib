@@ -2,6 +2,7 @@ package ctrls;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
@@ -101,5 +102,11 @@ public class CtrlTextViewDel extends LinearLayout{
         this.mValue = mValue;
     }
 
+    private static class SavedState extends BaseSavedState{
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+    }
 
 }
