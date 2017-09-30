@@ -1,6 +1,8 @@
 package ctrls;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -30,9 +32,10 @@ public class CtrlContainerList extends LinearLayout {
     private TextView tv_qty_val;
     private LinearLayout ll_item_container;
 
-    private ArrayList<String> originMValue = new ArrayList<>();
+
 
     //propriedades
+    private ArrayList<String> originMValue = new ArrayList<>();
     private ArrayList<String> mValue = new ArrayList<>();
     private String mTitle;
     private String mHint;
@@ -234,5 +237,76 @@ public class CtrlContainerList extends LinearLayout {
         }
         //
         return false;
+    }
+
+    @Override
+    protected Parcelable onSaveInstanceState() {
+        Parcelable superState = super.onSaveInstanceState();
+        SavedState ss = new SavedState(superState);
+        //
+        ss._originMValue = originMValue;
+        ss._mValue = mValue;
+        ss._mTitle = mTitle;
+        ss._mHint = mHint;
+        ss._mQtyLbl = mQtyLbl;
+        ss._caseSensitive = caseSensitive;
+        ss._acceptDuplicatedItem = acceptDuplicatedItem;
+
+        return ss;
+
+    }
+
+    private static class SavedState extends BaseSavedState{
+
+        private ArrayList<String> _originMValue = new ArrayList<>();
+        private ArrayList<String> _mValue = new ArrayList<>();
+        private String _mTitle;
+        private String _mHint;
+        private String _mQtyLbl;
+        private boolean _caseSensitive;
+        private boolean _acceptDuplicatedItem;
+        private LinearLayout _ll_item_container;
+
+        public SavedState(Parcelable superState) {
+            super(superState);
+        }
+
+        public SavedState(Parcel in) {
+            super(in);
+
+            _originMValue = in.createStringArrayList();
+            _mValue = in.createStringArrayList();
+            _mTitle = in.readString();
+            _mHint = in.readString();
+            _mQtyLbl = in.readString();
+            _caseSensitive = in.readInt() == 1;
+            _acceptDuplicatedItem = in.readInt() == 1;
+            _ll_item_container = in.readTypedObject(LinearLayout.class);
+        }
+
+        @Override
+        public void writeToParcel(Parcel out, int flags) {
+            super.writeToParcel(out, flags);
+            //
+            out.writeList(_originMValue);
+            out.writeList(_mValue);
+            out.writeString(_mTitle);
+            out.writeString(_mHint);
+            out.writeString(_mQtyLbl);
+            out.writeInt(_caseSensitive ? 1 : 0);
+            out.writeInt(_acceptDuplicatedItem ? 1 : 0);
+            out.writeValue(_ll_item_container);
+        }
+
+        public static final Creator<SavedState> CREATOR
+                = new Creator<SavedState>() {
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
     }
 }
