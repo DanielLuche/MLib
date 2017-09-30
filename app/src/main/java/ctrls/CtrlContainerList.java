@@ -281,7 +281,7 @@ public class CtrlContainerList extends LinearLayout {
             _mQtyLbl = in.readString();
             _caseSensitive = in.readInt() == 1;
             _acceptDuplicatedItem = in.readInt() == 1;
-            _ll_item_container = in.readTypedObject(LinearLayout.class);
+            //_ll_item_container = in.readTypedObject(LinearLayout.class);
         }
 
         @Override
