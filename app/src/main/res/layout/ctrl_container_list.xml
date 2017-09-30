@@ -67,7 +67,7 @@
 
                 <View
                     android:layout_width="5dp"
-                    android:layout_height="match_parent"/>
+                    android:layout_height="match_parent" />
 
                 <TextView
                     android:id="@+id/ctrl_container_list_tv_qty_val"
@@ -79,19 +79,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/mLib_color_gray_1"
-                android:padding="1dp"
-                />
+                android:padding="1dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ctrl_container_list_ll_container"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ctrl_container_list_ll_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+
+import java.util.ArrayList;
 
 import ctrls.CtrlContainerList;
 import ctrls.CtrlTextViewTest;
@@ -19,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private CtrlContainerList containerList;
     private Switch sw_dup;
     private Switch sw_case;
-
+    private Button btn_check_val;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +76,17 @@ public class MainActivity extends AppCompatActivity {
                 containerList.setCaseSensitive(b);
             }
         });
+        //
+        btn_check_val = (Button) findViewById(R.id.main_btn_check_val);
+        //
+        btn_check_val.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<String>tst = containerList.getmValue();
 
+                tst.size();
+            }
+        });
 
         //
         containerList = (CtrlContainerList) findViewById(R.id.main_ctrl_002);
@@ -83,5 +96,6 @@ public class MainActivity extends AppCompatActivity {
         containerList.setmQtyLbl("Qtd");
         containerList.setCaseSensitive(sw_case.isChecked());
         containerList.setAcceptDuplicatedItem(sw_dup.isChecked());
+
     }
 }

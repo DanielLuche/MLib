@@ -80,6 +80,8 @@ public class CtrlContainerList extends LinearLayout {
                 mValue.remove(text);
                 //
                 ll_item_container.removeView(view);
+                //
+                updateItemQtyLabel();
             }
         };
         //Seta Layout do component
@@ -143,6 +145,25 @@ public class CtrlContainerList extends LinearLayout {
         //
         mValue.add(new_item);
         ll_item_container.addView(viewDel);
+        //
+        updateItemQtyLabel();
+    }
+
+    private void attachItensToContainer(ArrayList<String> itemList){
+        for (int i = 0; i < itemList.size(); i++) {
+            CtrlTextViewDel viewDel = new CtrlTextViewDel(context);
+            viewDel.setmValue(itemList.get(i));
+            viewDel.setOnIvActionClickLister(removeListner);
+            //
+            ll_item_container.addView(viewDel);
+            //
+            updateItemQtyLabel();
+        }
+
+
+    }
+
+    public void updateItemQtyLabel(){
         tv_qty_val.setText(String.valueOf(mValue.size()));
     }
 
@@ -168,7 +189,7 @@ public class CtrlContainerList extends LinearLayout {
     public void setmValue(ArrayList<String> mValue, boolean... default_val) {
         this.mValue = mValue;
         //
-        if(default_val[0]){
+        if(default_val.length > 0 && default_val[0]){
             originMValue.addAll(mValue);
         }
     }
@@ -256,6 +277,34 @@ public class CtrlContainerList extends LinearLayout {
 
     }
 
+    /**
+     * Metodo que roda após restaurar a tela
+     * Resgatar valores e mover para variaveis da classe.
+     * @param state
+     */
+    @Override
+    protected void onRestoreInstanceState(Parcelable state) {
+        super.onRestoreInstanceState(state);
+        //
+        if(!(state instanceof SavedState)){
+            super.onRestoreInstanceState(state);
+            return;
+        }
+
+        SavedState savedState = (SavedState) state;
+        originMValue = savedState._originMValue;
+        setmValue(savedState._mValue);
+        setmTitle(savedState._mTitle);
+        setmHint(savedState._mHint);
+        setmQtyLbl(savedState._mQtyLbl);
+        setCaseSensitive(savedState._caseSensitive);
+        setAcceptDuplicatedItem(savedState._acceptDuplicatedItem);
+        //
+        attachItensToContainer(mValue);
+        //
+        super.onRestoreInstanceState(savedState.getSuperState());
+    }
+
     private static class SavedState extends BaseSavedState{
 
         private ArrayList<String> _originMValue = new ArrayList<>();
@@ -265,7 +314,6 @@ public class CtrlContainerList extends LinearLayout {
         private String _mQtyLbl;
         private boolean _caseSensitive;
         private boolean _acceptDuplicatedItem;
-        private LinearLayout _ll_item_container;
 
         public SavedState(Parcelable superState) {
             super(superState);
@@ -281,7 +329,6 @@ public class CtrlContainerList extends LinearLayout {
             _mQtyLbl = in.readString();
             _caseSensitive = in.readInt() == 1;
             _acceptDuplicatedItem = in.readInt() == 1;
-            //_ll_item_container = in.readTypedObject(LinearLayout.class);
         }
 
         @Override
@@ -295,7 +342,6 @@ public class CtrlContainerList extends LinearLayout {
             out.writeString(_mQtyLbl);
             out.writeInt(_caseSensitive ? 1 : 0);
             out.writeInt(_acceptDuplicatedItem ? 1 : 0);
-            out.writeValue(_ll_item_container);
         }
 
         public static final Creator<SavedState> CREATOR
